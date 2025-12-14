@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Логистическая компания "Лочистический центр"</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #0a0a0a;
+            --secondary-color: #7c3aed;
+            --accent-color: #4e2595;
+            --light-color: #9d6ffd;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #fff;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--text-light);
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #2980b9;
+        }
+
+        .services {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--text-light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .tracking {
+            padding: 5rem 0;
+            background-color: var(--text-light);
+        }
+
+        .tracking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--light-color);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tracking-form h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .track-btn {
+            width: 100%;
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            border: none;
+            padding: 1rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .track-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .about {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .contact {
+            padding: 5rem 0;
+            background-color: var(--text-light);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info ul {
+            list-style: none;
+        }
+
+        .contact-info ul li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info ul li i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+            font-size: 1.2rem;
+            width: 25px;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .tracking-results {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .tracking-results.active {
+            display: block;
+            background-color: #f8f9fa;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                width: 100%;
+                margin-top: 1rem;
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin-left: 0;
+                margin-bottom: 0.8rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 1.5rem;
+                right: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-shipping-fast"></i>
+                Логистический центр
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#tracking">Отслеживание</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Логистические решения для вашего бизнеса</h1>
+            <p>Мы обеспечиваем быструю, надежную и экономичную доставку грузов по всему миру. Наши решения помогут оптимизировать вашу логистику и снизить затраты.</p>
+            <a href="#contact" class="cta-button">Связаться с нами</a>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши услуги</h2>
+                <p>Мы предлагаем широкий спектр логистических услуг для удовлетворения всех ваших потребностей</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Наземные перевозки</h3>
+                    <p>Эффективная доставка грузов автомобильным транспортом по России и странам СНГ.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>Авиаперевозки</h3>
+                    <p>Быстрая доставка срочных грузов воздушным транспортом по всему миру.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <h3>Морские перевозки</h3>
+                    <p>Экономичная транспортировка крупных партий грузов морским транспортом.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <h3>Складирование</h3>
+                    <p>Безопасное хранение товаров на современных складах с контролем температуры и влажности.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <h3>Упаковка и фасовка</h3>
+                    <p>Профессиональная упаковка товаров для обеспечения безопасности при транспортировке.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Таможенное оформление</h3>
+                    <p>Полное сопровождение таможенного оформления импортных и экспортных грузов.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tracking" id="tracking">
+        <div class="container">
+            <div class="section-title">
+                <h2>Отследить груз</h2>
+                <p>Введите номер вашей посылки, чтобы узнать текущий статус доставки</p>
+            </div>
+            
+            <div class="tracking-form">
+                <h3>Отслеживание отправления</h3>
+                <form id="trackingForm">
+                    <div class="form-group">
+                        <label for="trackingNumber">Номер отслеживания:</label>
+                        <input type="text" id="trackingNumber" placeholder="Пример: 11111" required>
+                    </div>
+                    
+                    <button type="submit" class="track-btn">
+                        <i class="fas fa-search"></i> Отследить
+                    </button>
+                </form>
+                
+                <div class="tracking-results" id="trackingResults">
+                    <h4>Информация о грузе:</h4>
+                    <p><strong>Номер отправления:</strong> <span id="resultNumber">BD-784512369</span></p>
+                    <p><strong>Статус:</strong> <span id="resultStatus">В пути</span></p>
+                    <p><strong>Текущее местоположение:</strong> <span id="resultLocation">Москва, сортировочный центр</span></p>
+                    <p><strong>Ожидаемая дата доставки:</strong> <span id="resultDate">15 октября 2023</span></p>
+                    <p><strong>Получатель:</strong> <span id="resultReceiver">Иванов Иван Иванович</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>О нашей компании</h2>
+                    <p>Логистическая компания "Логистический центр" работает на рынке с 2018 года и специализируется на предоставлении комплексных логистических решений для бизнеса.</p>
+                    <p>За годы работы мы создали надежную сеть партнеров по всему миру, что позволяет нам осуществлять доставку грузов в более чем 150 стран.</p>
+                    <p>Наша команда профессионалов гарантирует безопасность и сохранность ваших грузов на всех этапах транспортировки.</p>
+                    <p>Мы постоянно инвестируем в современные технологии отслеживания и управления логистикой, чтобы предоставлять нашим клиентам лучший сервис.</p>
+                    <a href="#contact" class="cta-button" style="margin-top: 1.5rem;">Узнать больше</a>
+                </div>
+                
+                <div class="about-image">
+                    <img src="https://www.logos3pl.com/wp-content/uploads/2025/05/courier-3pl-glossary-logos-logistics.jpg" alt="Логистический склад">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Контакты</h2>
+                <p>Свяжитесь с нами для получения подробной информации о наших услугах</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Наши контакты</h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>г. Тольятти, ул. Гидротехническая, д.22</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+7 (999) 888-77-66</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@fastdelivery.ru</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Пн-Пт: 9:00-18:00, Сб: 10:00-16:00</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="contact-info">
+                    <h3>Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#services">Наши услуги</a></li>
+                        <li><a href="#tracking">Отслеживание</a></li>
+                        <li><a href="#about">О компании</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="contact-info">
+                    <h3>Подписаться на новости</h3>
+                    <p>Получайте информацию о специальных предложениях и новостях компании</p>
+                    <form id="subscribeForm" style="margin-top: 1rem;">
+                        <div class="form-group">
+                            <input type="email" placeholder="Ваш email" required style="width: 100%;">
+                        </div>
+                        <button type="submit" class="track-btn" style="padding: 0.8rem;">Подписаться</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Логистический центр</h3>
+                    <p>Мы обеспечиваем надежные логистические решения для вашего бизнеса с 2018 года.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Наши услуги</h3>
+                    <ul>
+                        <li><a href="#">Наземные перевозки</a></li>
+                        <li><a href="#">Авиаперевозки</a></li>
+                        <li><a href="#">Морские перевозки</a></li>
+                        <li><a href="#">Складирование</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Полезные ссылки</h3>
+                    <ul>
+                        <li><a href="#">Рассчитать стоимость</a></li>
+                        <li><a href="#">Правила перевозки</a></li>
+                        <li><a href="#">Документы</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Социальные сети</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-vk"></i> ВКонтакте</a></li>
+                        <li><a href="#"><i class="fab fa-telegram"></i> Telegram</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                        <li><a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Логистическая компания "Логистический центр". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+            });
+        });
+        const trackingForm = document.getElementById('trackingForm');
+        const trackingResults = document.getElementById('trackingResults');
+    
+        const trackingData = {
+            '11111': {
+                status: 'В пути',
+                location: 'Москва, сортировочный центр',
+                date: '25 октября 2025',
+                receiver: 'Иванов Иван Иванович'
+            },
+            '22222': {
+                status: 'Доставлен',
+                location: 'Санкт-Петербург, доставлен получателю',
+                date: '01 мая 2025',
+                receiver: 'Петрова Анна Сергеевна'
+            },
+            '33333': {
+                status: 'Обработка',
+                location: 'Новосибирск, принят на склад',
+                date: '20 октября 2025',
+                receiver: 'Сидоров Дмитрий Петрович'
+            },
+            '44444': {
+                status: 'В пути',
+                location: 'Самара, принят на склад',
+                date: '29 ноября 2025',
+                receiver: 'Иванов Иван Иванович'
+            },
+            '55555': {
+                status: 'В пути',
+                location: 'Москва, принят на склад',
+                date: '09  февраля 2025',
+                receiver: 'Иванов Иван Иванович'
+            },
+        };
+        
+        trackingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const trackingNumber = document.getElementById('trackingNumber').value.trim();
+            
+            if (trackingData[trackingNumber]) {
+                const data = trackingData[trackingNumber];
+                document.getElementById('resultNumber').textContent = trackingNumber;
+                document.getElementById('resultStatus').textContent = data.status;
+                document.getElementById('resultLocation').textContent = data.location;
+                document.getElementById('resultDate').textContent = data.date;
+                document.getElementById('resultReceiver').textContent = data.receiver;
+                trackingResults.classList.add('active');
+
+                const statusElement = document.getElementById('resultStatus');
+                statusElement.style.color = data.status === 'Доставлен' ? '#27ae60' : 
+                                           data.status === 'В пути' ? '#3498db' : 
+                                           data.status === 'Обработка' ? '#f39c12' : '#333';
+            } else {
+                document.getElementById('resultNumber').textContent = trackingNumber;
+                document.getElementById('resultStatus').textContent = 'Не найден';
+                document.getElementById('resultStatus').style.color = '#e74c3c';
+                document.getElementById('resultLocation').textContent = 'Информация отсутствует';
+                document.getElementById('resultDate').textContent = 'Информация отсутствует';
+                document.getElementById('resultReceiver').textContent = 'Информация отсутствует';
+                trackingResults.classList.add('active');
+            }
+        });
+        
+        const subscribeForm = document.getElementById('subscribeForm');
+        subscribeForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = subscribeForm.querySelector('input[type="email"]');
+            if (emailInput.value) {
+                alert('Спасибо за подписку! Мы отправим вам информацию о наших новостях и специальных предложениях.');
+                emailInput.value = '';
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
